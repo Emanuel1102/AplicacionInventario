@@ -19,38 +19,25 @@ while True:
             break
         elif menu>0 and menu<7:
             while True:
-                try:
-                    match menu:
-                        case 1 :
-                            product_name=input('Nombre del producto => ').lower()
-                            unitary_price=float(input('Precio unitario => $'))
-                            product_quantity=int(input('Cantidad del producto => '))
-                            new_product={
-                                    'product_name':product_name,
-                                    'unitary_price': unitary_price,
-                                    'product_quantity':product_quantity,
-                                    'product_total': product_quantity*unitary_price 
-                            }
-                            add(new_product)
-                            print('Producto agregado exitosamente')
-                            break
-                        case 2:
-                            view()
-                            break
-                        case 3:
-                            print('Aun no disponible')
-                            break
-                        case 4: 
-                            print('Aun no disponible')
-                            break
-                        case 5:
-                            print('Aun no disponible')
-                            break
-                        case 6:
-                            report()
-                            break
-                except ValueError:
-                    print('Ingresaste algo que NO es un número en un campo numérico, intenta nuevamente')
+                match menu:
+                    case 1 :
+                        add()
+                        break
+                    case 2:
+                        view()
+                        break
+                    case 3:
+                        print('Aun no disponible')
+                        break
+                    case 4: 
+                        print('Aun no disponible')
+                        break
+                    case 5:
+                        print('Aun no disponible')
+                        break
+                    case 6:
+                        report()
+                        break
         else:
             print('No se reconoce la opcion')
             
