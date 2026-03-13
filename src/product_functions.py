@@ -1,7 +1,23 @@
 products=[]
 
-def add_product(product):        
-    products.append(product)
+def add_product():   
+    while True:
+        try:
+            product_name=input('Nombre del producto => ').lower()
+            unitary_price=float(input('Precio unitario => $'))
+            product_quantity=int(input('Cantidad del producto => '))
+            new_product={
+                    'product_name':product_name,
+                    'unitary_price': unitary_price,
+                    'product_quantity':product_quantity,
+                    'product_total': product_quantity*unitary_price 
+            }    
+            products.append(new_product)
+            print('Producto agregado exitosamente')
+            break
+        except ValueError:
+            print('Ingresaste algo que NO es un número en un campo numérico, intenta nuevamente') 
+
 
 def view_inventory():
     print(f"| {'-'*30} |")
