@@ -1,4 +1,4 @@
-from src.product_functions import add_product as add, view_inventory as view, generate_report as report
+from src.product_functions import add_product as add, view_inventory as view, generate_report as report, search_product as search
 
 while True:
     try:
@@ -33,7 +33,8 @@ while True:
                         print('Aun no disponible')
                         break
                     case 5:
-                        print('Aun no disponible')
+                        search()
+                        # print('Aun no disponible')
                         break
                     case 6:
                         report()
