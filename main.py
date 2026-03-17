@@ -4,7 +4,7 @@ while True:
     try:
         menu=int(input('''
         -----------------------------------------------------------------------------
-                    Selecciona una opcion 
+                    Selecciona una opcion (digita el número):
                     1. Agregar un producto
                     2. Ver inventario
                     3. Actualizar producto
@@ -34,7 +34,6 @@ while True:
                         break
                     case 5:
                         search()
-                        # print('Aun no disponible')
                         break
                     case 6:
                         report()

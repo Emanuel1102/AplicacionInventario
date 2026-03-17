@@ -1,15 +1,4 @@
-products=[
-    {
-        'product_name':'camisa',
-        'unitary_price': 12,
-        'product_quantity':2
-    },
-    {
-        'product_name':'camisa',
-        'unitary_price': 12,
-        'product_quantity':2
-    }
-]
+products=[]
 
 def add_product():   
     while True:
@@ -17,27 +6,39 @@ def add_product():
             product_name=input('Nombre del producto => ').lower()
             unitary_price=float(input('Precio unitario => $'))
             product_quantity=int(input('Cantidad del producto => '))
-            new_product={
-                    'product_name':product_name,
-                    'unitary_price': unitary_price,
-                    'product_quantity':product_quantity,
-                    'product_total': product_quantity*unitary_price 
-            }    
-            products.append(new_product)
-            print('Producto agregado exitosamente')
-            break
+
+            exists = False
+
+            for product in products:
+                if product['product_name'] == product_name:
+                    exists = True
+                    break
+
+            if exists:
+                print('El producto ya está en el inventario')
+                break
+            else:
+                new_product={
+                        'product_name':product_name,
+                        'unitary_price': unitary_price,
+                        'product_quantity':product_quantity,
+                        'product_total': product_quantity*unitary_price 
+                }    
+                products.append(new_product)
+                print('Producto agregado exitosamente')
+                break
         except ValueError:
             print('Ingresaste algo que NO es un número en un campo numérico, intenta nuevamente') 
 
 
 def view_inventory():
     if len(products) > 0:
-        print(f"| {'-'*30} |")
-        print(f"| Product... | cant... |")
-        print(f"| {'-'*30} |")
+        print(f"|{'-'*24}|")
+        print(f"|   Product  |  Quantity |")
+        print(f"|{'-'*24}|")
         for product in products:
-            print(f"| {product['product_name']}     |    {product['product_quantity']}    |")
-            print(f"| {'_'*30} |")
+            print(f"| {product['product_name']}     |    {product['product_quantity']}     |")
+            print(f"|{'-'*24}|")
     else:
         print('Inventario vacío')
             
@@ -52,8 +53,15 @@ def generate_report():
         print('Nada que reportar')
 
 def search_product():
-    name = input('¿Que producto quieres buscar? => ')
+    name = input('¿Que producto quieres buscar (nombre)? => ')
     for product in products:
         if product['product_name'] == name:
-            print(product)
+            print(f"|{'-'*38}|")
+            print(f"| Product | Quantity | Price  |  total |")
+            print(f"|{'-'*38}|")
+            print(f"| {product['product_name']}  |    {product['product_quantity']}    |  ${product['unitary_price']}  | ${product['product_total']}  |")
+            print(f"|{'_'*38}|")
+            break
+    else:
+        print('Producto no encontrado')
 
