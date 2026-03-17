@@ -65,3 +65,32 @@ def search_product():
     else:
         print('Producto no encontrado')
 
+
+def update_product():
+    name = input('¿Que producto quieres actualizar (nombre)? => ')
+    for product in products:
+        if product['product_name'] == name:
+            print(f'{"#"*38}')
+            print('Producto para actualizar: ')
+            print(f'{"#"*38}')
+            print(f"|{'-'*38}|")
+            print(f"| Product | Quantity | Price  |  total |")
+            print(f"|{'-'*38}|")
+            print(f"| {product['product_name']}  |    {product['product_quantity']}    |  ${product['unitary_price']}  | ${product['product_total']}  |")
+            print(f"|{'_'*38}|")
+            while True:
+                try:
+                    nuevos_datos = {
+                        'unitary_price': float(input('Ingresa el nuevo precio => ')),
+                        'product_quantity': int(input('Ingresa la nueva cantidad => '))
+                    }
+                    product.update(nuevos_datos)
+                    print('Producto actualizado con éxito')
+                    break
+                except ValueError:
+                    try_again = input('Los datos deben ser de tipo numerico, ¿quieres intentar nuevamente? si/no => ').lower()
+                    if try_again != 'si':
+                        break
+        break
+    else:
+        print('Producto no encontrado')
