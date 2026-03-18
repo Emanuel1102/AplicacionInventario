@@ -1,4 +1,4 @@
-from src.product_functions import add_product as add, view_inventory as view, generate_report as report, search_product as search, update_product as update
+from src.product_functions import add_product as add, view_inventory as view, generate_report as report, search_product as search, update_product as update, delete_product as delete
 
 while True:
     try:
@@ -9,7 +9,7 @@ while True:
                     2. Ver inventario
                     3. Actualizar producto
                     4. Eliminar un producto
-                    5. Buscar producto
+                    5. Consultar producto
                     6. Generar reporte
                     7. Salir
                     => '''))
@@ -30,7 +30,7 @@ while True:
                         update()
                         break
                     case 4: 
-                        print('Aun no disponible')
+                        delete()
                         break
                     case 5:
                         search()

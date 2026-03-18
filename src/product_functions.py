@@ -4,29 +4,35 @@ def add_product():
     while True:
         try:
             product_name=input('Nombre del producto => ').lower()
-            unitary_price=float(input('Precio unitario => $'))
-            product_quantity=int(input('Cantidad del producto => '))
+            if product_name:
+                unitary_price=float(input('Precio unitario => $'))
+                product_quantity=int(input('Cantidad del producto => '))
 
-            exists = False
+                exists = False
 
-            for product in products:
-                if product['product_name'] == product_name:
-                    exists = True
+                for product in products:
+                    if product['product_name'] == product_name:
+                        exists = True
+                        break
+
+                if exists:
+                    print('El producto ya está en el inventario')
                     break
-
-            if exists:
-                print('El producto ya está en el inventario')
-                break
+                else:
+                    new_product={
+                            'product_name':product_name,
+                            'unitary_price': unitary_price,
+                            'product_quantity':product_quantity,
+                            'product_total': product_quantity*unitary_price 
+                    }    
+                    products.append(new_product)
+                    print('Producto agregado exitosamente')
+                    break
             else:
-                new_product={
-                        'product_name':product_name,
-                        'unitary_price': unitary_price,
-                        'product_quantity':product_quantity,
-                        'product_total': product_quantity*unitary_price 
-                }    
-                products.append(new_product)
-                print('Producto agregado exitosamente')
-                break
+                confirm = input('No ingresaste el nombre del producto, ¿deseas cancelar el proceso? si/no => ')
+                if confirm == 'si' or confirm == 's':
+                    print('Proceso cancelado')
+                    break
         except ValueError:
             print('Ingresaste algo que NO es un número en un campo numérico, intenta nuevamente') 
 
@@ -40,7 +46,7 @@ def view_inventory():
             print(f"| {product['product_name']}     |    {product['product_quantity']}     |")
             print(f"|{'-'*24}|")
     else:
-        print('Inventario vacío')
+        print('Inventario vacío, nada que mostrar')
             
 def generate_report():
     if len(products) > 0:
@@ -50,47 +56,106 @@ def generate_report():
         print(f'Total de unidades: {total_products}')
         print(f'Capital en materia prima: ${total_capital}')
     else:
-        print('Nada que reportar')
+        print('Inventario vacío, nada que reportar')
 
 def search_product():
-    name = input('¿Que producto quieres buscar (nombre)? => ')
-    for product in products:
-        if product['product_name'] == name:
-            print(f"|{'-'*38}|")
-            print(f"| Product | Quantity | Price  |  total |")
-            print(f"|{'-'*38}|")
-            print(f"| {product['product_name']}  |    {product['product_quantity']}    |  ${product['unitary_price']}  | ${product['product_total']}  |")
-            print(f"|{'_'*38}|")
-            break
+    if len(products) > 0:
+        while True:
+            name = input('¿Que producto quieres consultar (nombre)? => ')
+            if name:
+                for product in products:
+                    if product['product_name'] == name:
+                        print(f"|{'-'*38}|")
+                        print(f"| Product | Quantity | Price  |  total |")
+                        print(f"|{'-'*38}|")
+                        print(f"| {product['product_name']}  |    {product['product_quantity']}    |  ${product['unitary_price']}  | ${product['product_total']}  |")
+                        print(f"|{'_'*38}|")
+                        break
+                else:
+                    print('Producto no encontrado')
+                break          
+            else:
+                confirm = input('No ingresaste el nombre del producto, deseas cancelar el proceso? si/no => ')
+                if confirm == 'si' or confirm == 's':
+                    print('Proceso cancelado')
+                    break
     else:
-        print('Producto no encontrado')
-
+        print('Inventario vacío, nada que consultar')
 
 def update_product():
-    name = input('¿Que producto quieres actualizar (nombre)? => ')
-    for product in products:
-        if product['product_name'] == name:
-            print(f'{"#"*38}')
-            print('Producto para actualizar: ')
-            print(f'{"#"*38}')
-            print(f"|{'-'*38}|")
-            print(f"| Product | Quantity | Price  |  total |")
-            print(f"|{'-'*38}|")
-            print(f"| {product['product_name']}  |    {product['product_quantity']}    |  ${product['unitary_price']}  | ${product['product_total']}  |")
-            print(f"|{'_'*38}|")
-            while True:
-                try:
-                    nuevos_datos = {
-                        'unitary_price': float(input('Ingresa el nuevo precio => ')),
-                        'product_quantity': int(input('Ingresa la nueva cantidad => '))
-                    }
-                    product.update(nuevos_datos)
-                    print('Producto actualizado con éxito')
-                    break
-                except ValueError:
-                    try_again = input('Los datos deben ser de tipo numerico, ¿quieres intentar nuevamente? si/no => ').lower()
-                    if try_again != 'si':
+    if len(products) > 0:
+        while True:
+            name = input('¿Que producto quieres actualizar (nombre)? => ')
+            if name:
+                for product in products:
+                    if product['product_name'] == name:
+                        print(f'{"#"*38}')
+                        print('Producto para actualizar: ')
+                        print(f'{"#"*38}')
+                        print(f"|{'-'*38}|")
+                        print(f"| Product | Quantity | Price  |  total |")
+                        print(f"|{'-'*38}|")
+                        print(f"| {product['product_name']}  |    {product['product_quantity']}    |  ${product['unitary_price']}  | ${product['product_total']}  |")
+                        print(f"|{'_'*38}|")
+                        while True:
+                            try:
+                                new_price = float(input('Ingresa el nuevo precio => $'))
+                                new_quantity = int(input('Ingresa la nueva cantidad => '))
+                                nuevos_datos = {
+                                    'unitary_price': new_price,
+                                    'product_quantity': new_quantity,
+                                    'product_total': new_price * new_quantity
+                                }
+                                product.update(nuevos_datos)
+                                print('Producto actualizado con éxito')
+                                break
+                            except ValueError:
+                                try_again = input('Los datos deben ser de tipo numerico, ¿quieres intentar nuevamente? si/no => ').lower()
+                                if try_again != 'si':
+                                    print('Proceso cancelado')
+                                    break
                         break
-        break
+                else:
+                    print('Producto no encontrado')
+                break
+            else:
+                confirm = input('No ingresaste el nombre del producto, deseas cancelar el proceso? si/no => ')
+                if confirm == 'si' or confirm == 's':
+                    print('Proceso cancelado')
+                    break     
     else:
-        print('Producto no encontrado')
+        print('Inventario vacio, nada que actualizar')
+        
+def delete_product():
+    if len(products) > 0:
+        while True:
+            name = input('¿Que producto quieres eliminar (nombre)? => ')
+            if name:
+                for product in products:
+                    if product['product_name'] == name:
+                        print(f'{"#"*38}')
+                        print('Producto para eliminar: ')
+                        print(f'{"#"*38}')
+                        print(f"|{'-'*38}|")
+                        print(f"| Product | Quantity | Price  |  total |")
+                        print(f"|{'-'*38}|")
+                        print(f"| {product['product_name']}  |    {product['product_quantity']}    |  ${product['unitary_price']}  | ${product['product_total']}  |")
+                        print(f"|{'_'*38}|")
+                        confirm = input('Seguro que quieres eliminar este producto? si/no => ').lower()
+                        if confirm == 'si' or confirm == 's':
+                            products.remove(product) 
+                            print('Producto eliminado con éxito')
+                        else:
+                            print('Proceso cancelado')
+
+                        break
+                else:
+                    print('Producto no encontrado')
+                break
+            else:
+                confirm = input('No ingresaste el nombre del producto, deseas cancelar el proceso? si/no => ')
+                if confirm == 'si' or confirm == 's':
+                    print('Proceso cancelado')
+                    break
+    else:
+        print('Inventario vacío, no hay nada que eliminar')
