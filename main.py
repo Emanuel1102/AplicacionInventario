@@ -1,15 +1,15 @@
-from src.product_functions import add_product as add, view_inventory as view, generate_report as report
+from src.product_functions import add_product as add, view_inventory as view, generate_report as report, search_product as search, update_product as update, delete_product as delete
 
 while True:
     try:
         menu=int(input('''
         -----------------------------------------------------------------------------
-                    Selecciona una opcion 
+                    Selecciona una opcion (digita el número):
                     1. Agregar un producto
                     2. Ver inventario
                     3. Actualizar producto
                     4. Eliminar un producto
-                    5. Buscar producto
+                    5. Consultar producto
                     6. Generar reporte
                     7. Salir
                     => '''))
@@ -27,13 +27,13 @@ while True:
                         view()
                         break
                     case 3:
-                        print('Aun no disponible')
+                        update()
                         break
                     case 4: 
-                        print('Aun no disponible')
+                        delete()
                         break
                     case 5:
-                        print('Aun no disponible')
+                        search()
                         break
                     case 6:
                         report()
