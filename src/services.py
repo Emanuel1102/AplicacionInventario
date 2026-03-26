@@ -22,8 +22,7 @@ def add_product():
                     new_product={
                             'product_name':product_name,
                             'unitary_price': unitary_price,
-                            'product_quantity':product_quantity,
-                            'product_total': product_quantity*unitary_price 
+                            'product_quantity':product_quantity
                     }    
                     products.append(new_product)
                     print('Producto agregado exitosamente')
@@ -35,7 +34,6 @@ def add_product():
                     break
         except ValueError:
             print('Ingresaste algo que NO es un número en un campo numérico, intenta nuevamente') 
-
 
 def view_inventory():
     if len(products) > 0:
@@ -51,10 +49,10 @@ def view_inventory():
 def generate_report():
     if len(products) > 0:
         total_products = sum([product['product_quantity'] for product in products])
-        total_capital = sum([product['product_total'] for product in products])
+        # total_capital = sum([product['product_total'] for product in products])
         print(f'Total de productos: {len(products)}')
         print(f'Total de unidades: {total_products}')
-        print(f'Capital en materia prima: ${total_capital}')
+        # print(f'Capital en materia prima: ${total_capital}')
     else:
         print('Inventario vacío, nada que reportar')
 
@@ -66,9 +64,9 @@ def search_product():
                 for product in products:
                     if product['product_name'] == name:
                         print(f"|{'-'*38}|")
-                        print(f"| Product | Quantity | Price  |  total |")
+                        print(f"| Product | Quantity | Price  |")
                         print(f"|{'-'*38}|")
-                        print(f"| {product['product_name']}  |    {product['product_quantity']}    |  ${product['unitary_price']}  | ${product['product_total']}  |")
+                        print(f"| {product['product_name']}  |    {product['product_quantity']}    |  ${product['unitary_price']} |")
                         print(f"|{'_'*38}|")
                         break
                 else:
@@ -93,9 +91,9 @@ def update_product():
                         print('Producto para actualizar: ')
                         print(f'{"#"*38}')
                         print(f"|{'-'*38}|")
-                        print(f"| Product | Quantity | Price  |  total |")
+                        print(f"| Product | Quantity | Price  |")
                         print(f"|{'-'*38}|")
-                        print(f"| {product['product_name']}  |    {product['product_quantity']}    |  ${product['unitary_price']}  | ${product['product_total']}  |")
+                        print(f"| {product['product_name']}  |    {product['product_quantity']}    |  ${product['unitary_price']}  |")
                         print(f"|{'_'*38}|")
                         while True:
                             try:
@@ -103,8 +101,7 @@ def update_product():
                                 new_quantity = int(input('Ingresa la nueva cantidad => '))
                                 nuevos_datos = {
                                     'unitary_price': new_price,
-                                    'product_quantity': new_quantity,
-                                    'product_total': new_price * new_quantity
+                                    'product_quantity': new_quantity
                                 }
                                 product.update(nuevos_datos)
                                 print('Producto actualizado con éxito')
@@ -137,9 +134,9 @@ def delete_product():
                         print('Producto para eliminar: ')
                         print(f'{"#"*38}')
                         print(f"|{'-'*38}|")
-                        print(f"| Product | Quantity | Price  |  total |")
+                        print(f"| Product | Quantity | Price  |")
                         print(f"|{'-'*38}|")
-                        print(f"| {product['product_name']}  |    {product['product_quantity']}    |  ${product['unitary_price']}  | ${product['product_total']}  |")
+                        print(f"| {product['product_name']}  |    {product['product_quantity']}    |  ${product['unitary_price']}  |")
                         print(f"|{'_'*38}|")
                         confirm = input('Seguro que quieres eliminar este producto? si/no => ').lower()
                         if confirm == 'si' or confirm == 's':

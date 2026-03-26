@@ -1,4 +1,13 @@
-from src.product_functions import add_product as add, view_inventory as view, generate_report as report, search_product as search, update_product as update, delete_product as delete
+from src.services import (add_product as add,
+                          view_inventory as view,
+                          generate_report as report,
+                          search_product as search, 
+                          update_product as update, 
+                          delete_product as delete,
+                          products)
+
+from src.files import (save_csv as save,
+                       charge_csv as charge)
 
 while True:
     try:
@@ -11,13 +20,15 @@ while True:
                     4. Eliminar un producto
                     5. Consultar producto
                     6. Generar reporte
-                    7. Salir
+                    7. Guardar csv
+                    8. Cargar csv
+                    9. Salir
                     => '''))
         
-        if menu == 7:
+        if menu == 9:
             print('Proceso terminado')
             break
-        elif menu>0 and menu<7:
+        elif menu>0 and menu<9:
             while True:
                 match menu:
                     case 1 :
@@ -37,6 +48,12 @@ while True:
                         break
                     case 6:
                         report()
+                        break
+                    case 7:
+                        save(products)
+                        break
+                    case 8:
+                        charge()
                         break
         else:
             print('No se reconoce la opcion')
