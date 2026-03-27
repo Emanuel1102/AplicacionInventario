@@ -53,7 +53,7 @@ while True:
                         save(products)
                         break
                     case 8:
-                        charge()
+                        charge(products)
                         break
         else:
             print('No se reconoce la opcion')

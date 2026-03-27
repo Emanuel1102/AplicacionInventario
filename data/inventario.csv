@@ -1,6 +1,5 @@
 product_name,unitary_price,product_quantity
-camisa,100000.0,12
-pantalon,120000,4
-gorra,25000,5
-product_name,unitary_price,product_quantity
-camisa,12.0,12
+teclado,80000.0,12
+mouse,90000.0,10
+monitor,300000.0,6
+procesador,500000.0,5

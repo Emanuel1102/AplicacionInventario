@@ -49,10 +49,14 @@ def view_inventory():
 def generate_report():
     if len(products) > 0:
         total_products = sum([product['product_quantity'] for product in products])
-        # total_capital = sum([product['product_total'] for product in products])
+        more_expensive_product = max(products, key=lambda p : p['unitary_price'])
+        largest_stock = max(products, key=lambda p : p['product_quantity'])
+        total_capital = sum(p['unitary_price'] * p['product_quantity'] for p in products)
         print(f'Total de productos: {len(products)}')
         print(f'Total de unidades: {total_products}')
-        # print(f'Capital en materia prima: ${total_capital}')
+        print(f'Producto mas caro: {more_expensive_product['product_name']} | ${more_expensive_product['unitary_price']} | {more_expensive_product['product_quantity']}')
+        print(f'Producto con mayor stock: {largest_stock['product_name']} | ${largest_stock['unitary_price']} | {largest_stock['product_quantity']}')
+        print(f'Capital en materia prima: ${total_capital}')
     else:
         print('Inventario vacío, nada que reportar')
 
