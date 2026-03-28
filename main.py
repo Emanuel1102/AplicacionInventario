@@ -1,4 +1,13 @@
-from src.product_functions import add_product as add, view_inventory as view, generate_report as report, search_product as search, update_product as update, delete_product as delete
+from src.services import (add_product as add,
+                          view_inventory as view,
+                          generate_report as report,
+                          search_product as search, 
+                          update_product as update, 
+                          delete_product as delete,
+                          products)
+
+from src.files import (save_csv as save,
+                       charge_csv as charge)
 
 while True:
     try:
@@ -11,13 +20,15 @@ while True:
                     4. Eliminar un producto
                     5. Consultar producto
                     6. Generar reporte
-                    7. Salir
+                    7. Guardar csv
+                    8. Cargar csv
+                    9. Salir
                     => '''))
         
-        if menu == 7:
+        if menu == 9:
             print('Proceso terminado')
             break
-        elif menu>0 and menu<7:
+        elif menu>0 and menu<9:
             while True:
                 match menu:
                     case 1 :
@@ -37,6 +48,24 @@ while True:
                         break
                     case 6:
                         report()
+                        break
+                    case 7:
+                        print('# En el sistema por defecto está el archivo inventario.csv, pero puedes elegir un archivo donde guardar, si no existe se crea automáticamente siempre y cuando exista la ruta')
+                        print('# Puedes escribir el nombre del archivo sin la extensión')
+                        print('# Si quieres guardar en el archivo inventario.csv solo presiona enter \n')
+                        file_save = input('Ingresa el nombre del archivo => ')
+                        if not file_save:
+                            file_save = 'inventario'
+                        save(products, file_save)
+                        break
+                    case 8:
+                        print('# En el sistema por defecto está el archivo inventario.csv, pero puedes elegir que archivo cargar siempre y cuando exista la ruta')
+                        print('# Puedes escribir el nombre del archivo sin la extensión')
+                        print('# Si quieres cargar el archivo inventario.csv solo presiona enter \n')
+                        file_charge = input('Ingresa el nombre del archivo para cargar => ')
+                        if not file_charge:
+                            file_charge = 'inventario'
+                        charge(products, file_charge)
                         break
         else:
             print('No se reconoce la opcion')
