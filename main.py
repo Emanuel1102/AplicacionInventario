@@ -50,10 +50,22 @@ while True:
                         report()
                         break
                     case 7:
-                        save(products)
+                        print('# En el sistema por defecto está el archivo inventario.csv, pero puedes elegir un archivo donde guardar, si no existe se crea automáticamente siempre y cuando exista la ruta')
+                        print('# Puedes escribir el nombre del archivo sin la extensión')
+                        print('# Si quieres guardar en el archivo inventario.csv solo presiona enter \n')
+                        file_save = input('Ingresa el nombre del archivo => ')
+                        if not file_save:
+                            file_save = 'inventario'
+                        save(products, file_save)
                         break
                     case 8:
-                        charge(products)
+                        print('# En el sistema por defecto está el archivo inventario.csv, pero puedes elegir que archivo cargar siempre y cuando exista la ruta')
+                        print('# Puedes escribir el nombre del archivo sin la extensión')
+                        print('# Si quieres cargar el archivo inventario.csv solo presiona enter \n')
+                        file_charge = input('Ingresa el nombre del archivo para cargar => ')
+                        if not file_charge:
+                            file_charge = 'inventario'
+                        charge(products, file_charge)
                         break
         else:
             print('No se reconoce la opcion')

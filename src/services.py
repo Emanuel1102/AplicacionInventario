@@ -16,7 +16,7 @@ def add_product():
                         break
 
                 if exists:
-                    print('El producto ya está en el inventario')
+                    print('¡El producto ya está en el inventario!')
                     break
                 else:
                     new_product={
@@ -28,12 +28,12 @@ def add_product():
                     print('Producto agregado exitosamente')
                     break
             else:
-                confirm = input('No ingresaste el nombre del producto, ¿deseas cancelar el proceso? si/no => ')
+                confirm = input('¡No ingresaste el nombre del producto!, ¿deseas cancelar el proceso? si/no => ')
                 if confirm == 'si' or confirm == 's':
-                    print('Proceso cancelado')
+                    print('¡Proceso cancelado!')
                     break
         except ValueError:
-            print('Ingresaste algo que NO es un número en un campo numérico, intenta nuevamente') 
+            print('¡Ingresaste algo que NO es un número en un campo numérico, intenta nuevamente!') 
 
 def view_inventory():
     if len(products) > 0:
@@ -44,7 +44,7 @@ def view_inventory():
             print(f"| {product['product_name']}     |    {product['product_quantity']}     |")
             print(f"|{'-'*24}|")
     else:
-        print('Inventario vacío, nada que mostrar')
+        print('¡Inventario vacío, nada que mostrar!')
             
 def generate_report():
     if len(products) > 0:
@@ -52,13 +52,13 @@ def generate_report():
         more_expensive_product = max(products, key=lambda p : p['unitary_price'])
         largest_stock = max(products, key=lambda p : p['product_quantity'])
         total_capital = sum(p['unitary_price'] * p['product_quantity'] for p in products)
-        print(f'Total de productos: {len(products)}')
-        print(f'Total de unidades: {total_products}')
-        print(f'Producto mas caro: {more_expensive_product['product_name']} | ${more_expensive_product['unitary_price']} | {more_expensive_product['product_quantity']}')
-        print(f'Producto con mayor stock: {largest_stock['product_name']} | ${largest_stock['unitary_price']} | {largest_stock['product_quantity']}')
-        print(f'Capital en materia prima: ${total_capital}')
+        print(f"Total de productos: {len(products)}")
+        print(f"Total de unidades: {total_products}")
+        print(f"Producto mas caro: {more_expensive_product['product_name']} | ${more_expensive_product['unitary_price']} | {more_expensive_product['product_quantity']}")
+        print(f"Producto con mayor stock: {largest_stock['product_name']} | ${largest_stock['unitary_price']} | {largest_stock['product_quantity']}")
+        print(f"Capital en materia prima: ${total_capital}")
     else:
-        print('Inventario vacío, nada que reportar')
+        print('¡Inventario vacío, nada que reportar!')
 
 def search_product():
     if len(products) > 0:
@@ -74,15 +74,15 @@ def search_product():
                         print(f"|{'_'*38}|")
                         break
                 else:
-                    print('Producto no encontrado')
+                    print('¡Producto no encontrado!')
                 break          
             else:
                 confirm = input('No ingresaste el nombre del producto, deseas cancelar el proceso? si/no => ')
                 if confirm == 'si' or confirm == 's':
-                    print('Proceso cancelado')
+                    print('¡Proceso cancelado!')
                     break
     else:
-        print('Inventario vacío, nada que consultar')
+        print('¡Inventario vacío, nada que consultar!')
 
 def update_product():
     if len(products) > 0:
@@ -111,21 +111,21 @@ def update_product():
                                 print('Producto actualizado con éxito')
                                 break
                             except ValueError:
-                                try_again = input('Los datos deben ser de tipo numerico, ¿quieres intentar nuevamente? si/no => ').lower()
+                                try_again = input('¡Los datos deben ser de tipo numerico!, ¿quieres intentar nuevamente? si/no => ').lower()
                                 if try_again != 'si':
-                                    print('Proceso cancelado')
+                                    print('¡Proceso cancelado!')
                                     break
                         break
                 else:
-                    print('Producto no encontrado')
+                    print('¡Producto no encontrado!')
                 break
             else:
-                confirm = input('No ingresaste el nombre del producto, deseas cancelar el proceso? si/no => ')
+                confirm = input('¡No ingresaste el nombre del producto!, ¿deseas cancelar el proceso? si/no => ')
                 if confirm == 'si' or confirm == 's':
-                    print('Proceso cancelado')
+                    print('¡Proceso cancelado!')
                     break     
     else:
-        print('Inventario vacio, nada que actualizar')
+        print('¡Inventario vacio, nada que actualizar!')
         
 def delete_product():
     if len(products) > 0:
@@ -147,16 +147,16 @@ def delete_product():
                             products.remove(product) 
                             print('Producto eliminado con éxito')
                         else:
-                            print('Proceso cancelado')
+                            print('¡Proceso cancelado!')
 
                         break
                 else:
-                    print('Producto no encontrado')
+                    print('¡Producto no encontrado!')
                 break
             else:
-                confirm = input('No ingresaste el nombre del producto, deseas cancelar el proceso? si/no => ')
+                confirm = input('¡No ingresaste el nombre del producto!, ¿deseas cancelar el proceso? si/no => ')
                 if confirm == 'si' or confirm == 's':
-                    print('Proceso cancelado')
+                    print('¡Proceso cancelado!')
                     break
     else:
-        print('Inventario vacío, no hay nada que eliminar')
+        print('¡Inventario vacío, no hay nada que eliminar!')
